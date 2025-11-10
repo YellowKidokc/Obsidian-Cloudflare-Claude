@@ -1,0 +1,143 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const {
+  title,
+  description = "Theophysics: Living Knowledge Graph - Interactive exploration of consciousness, quantum mechanics, and theology",
+  ogImage = "/og-image.png"
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Primary Meta Tags -->
+    <title>{title} | Theophysics</title>
+    <meta name="title" content={`${title} | Theophysics`} />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={`${title} | Theophysics`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(ogImage, Astro.site)} />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalURL} />
+    <meta property="twitter:title" content={`${title} | Theophysics`} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={new URL(ogImage, Astro.site)} />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- MathJax -->
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']],
+          processEscapes: true,
+          processEnvironments: true,
+        },
+        options: {
+          skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        },
+        svg: {
+          fontCache: 'global'
+        }
+      };
+    </script>
+    <script type="text/javascript" id="MathJax-script" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+  </head>
+  <body>
+    <!-- Navigation Header -->
+    <header class="nav-header">
+      <nav class="max-w-7xl mx-auto px-6 py-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-8">
+            <a href="/" class="text-xl font-bold text-obsidian-link hover:text-obsidian-link-hover transition-colors">
+              🌌 Theophysics
+            </a>
+            <div class="hidden md:flex gap-4">
+              <a href="/papers" class="nav-link">Papers</a>
+              <a href="/concepts" class="nav-link">Concepts</a>
+              <a href="/mindmaps" class="nav-link">Mind Maps</a>
+              <a href="/about" class="nav-link">About</a>
+            </div>
+          </div>
+          <div class="flex items-center gap-4">
+            <button id="search-button" class="nav-link" aria-label="Search">
+              🔍
+            </button>
+            <button id="theme-toggle" class="nav-link" aria-label="Toggle theme">
+              🌙
+            </button>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+      <slot />
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-obsidian-light mt-16">
+      <div class="max-w-7xl mx-auto px-6 py-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div>
+            <h3 class="font-semibold mb-3">Theophysics</h3>
+            <p class="text-sm text-obsidian-text-muted">
+              Living Knowledge Graph exploring the intersection of consciousness, quantum mechanics, and theology.
+            </p>
+          </div>
+          <div>
+            <h3 class="font-semibold mb-3">Quick Links</h3>
+            <ul class="space-y-2 text-sm">
+              <li><a href="/papers" class="text-obsidian-text-muted hover:text-obsidian-link">Research Papers</a></li>
+              <li><a href="/concepts" class="text-obsidian-text-muted hover:text-obsidian-link">Key Concepts</a></li>
+              <li><a href="/mindmaps" class="text-obsidian-text-muted hover:text-obsidian-link">Mind Maps</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="font-semibold mb-3">Resources</h3>
+            <ul class="space-y-2 text-sm">
+              <li><a href="/podcast" class="text-obsidian-text-muted hover:text-obsidian-link">🎙️ Podcast</a></li>
+              <li><a href="/audio" class="text-obsidian-text-muted hover:text-obsidian-link">🎧 Audio Papers</a></li>
+              <li><a href="/videos" class="text-obsidian-text-muted hover:text-obsidian-link">📹 Videos</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="mt-8 pt-8 border-t border-obsidian-light text-center text-sm text-obsidian-text-muted">
+          <p>Built with ❤️ for understanding the nature of reality</p>
+          <p class="mt-2">© {new Date().getFullYear()} Theophysics Research. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="/scripts/tooltips.js"></script>
+    <script src="/scripts/theme.js"></script>
+  </body>
+</html>

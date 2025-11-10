@@ -1,0 +1,30 @@
+---
+// Audio Player component for paper readings
+interface Props {
+  src: string;
+  title?: string;
+  description?: string;
+}
+
+const { src, title = 'Audio Reading', description } = Astro.props;
+---
+
+<div class="audio-player">
+  <div class="mb-3">
+    <h4 class="font-semibold text-obsidian-link flex items-center gap-2">
+      🎧 {title}
+    </h4>
+    {description && (
+      <p class="text-sm text-obsidian-text-muted mt-1">{description}</p>
+    )}
+  </div>
+  <audio controls class="w-full">
+    <source src={src} type="audio/mpeg" />
+    Your browser does not support the audio element.
+  </audio>
+  <div class="mt-2 flex gap-2 text-xs text-obsidian-text-muted">
+    <a href={src} download class="hover:text-obsidian-link transition-colors">
+      ⬇️ Download MP3
+    </a>
+  </div>
+</div>
