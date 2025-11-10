@@ -1,0 +1,221 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Import Inter font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@layer base {
+  :root {
+    --obsidian-darker: #1e1e1e;
+    --obsidian-dark: #202020;
+    --obsidian-mid: #2a2a2a;
+    --obsidian-light: #3a3a3a;
+    --obsidian-text: #dcddde;
+    --obsidian-text-muted: #888888;
+    --obsidian-link: #8ab4f8;
+  }
+
+  body {
+    @apply bg-obsidian-dark text-obsidian-text font-sans;
+    line-height: 1.6;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  /* Obsidian-style callouts */
+  .callout {
+    @apply my-4 p-4 rounded-lg border-l-4;
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .callout-title {
+    @apply font-semibold mb-2 flex items-center gap-2;
+  }
+
+  .callout-info {
+    @apply border-callout-info;
+  }
+
+  .callout-info .callout-title {
+    @apply text-callout-info;
+  }
+
+  .callout-success {
+    @apply border-callout-success;
+  }
+
+  .callout-success .callout-title {
+    @apply text-callout-success;
+  }
+
+  .callout-danger {
+    @apply border-callout-danger;
+  }
+
+  .callout-danger .callout-title {
+    @apply text-callout-danger;
+  }
+
+  .callout-warning {
+    @apply border-callout-warning;
+  }
+
+  .callout-warning .callout-title {
+    @apply text-callout-warning;
+  }
+
+  .callout-formula {
+    @apply border-callout-formula;
+  }
+
+  .callout-formula .callout-title {
+    @apply text-callout-formula;
+  }
+
+  .callout-mindmap {
+    @apply border-callout-mindmap;
+  }
+
+  .callout-mindmap .callout-title {
+    @apply text-callout-mindmap;
+  }
+
+  .callout-abstract {
+    @apply border-callout-abstract;
+  }
+
+  .callout-abstract .callout-title {
+    @apply text-callout-abstract;
+  }
+
+  .callout-audio {
+    @apply border-callout-audio;
+  }
+
+  .callout-audio .callout-title {
+    @apply text-callout-audio;
+  }
+
+  .callout-podcast {
+    @apply border-callout-podcast;
+  }
+
+  .callout-podcast .callout-title {
+    @apply text-callout-podcast;
+  }
+
+  /* Tooltip styling */
+  .tooltip {
+    @apply absolute z-50 px-3 py-2 text-sm rounded-lg shadow-lg pointer-events-none;
+    background: rgba(0, 0, 0, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    max-width: 320px;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+  }
+
+  .tooltip.show {
+    opacity: 1;
+  }
+
+  /* Wiki-style links */
+  .wiki-link {
+    @apply text-obsidian-link hover:text-obsidian-link-hover underline decoration-dotted underline-offset-2 cursor-pointer;
+    transition: color 0.2s ease;
+  }
+
+  /* Math equation styling */
+  .math-display {
+    @apply my-4 overflow-x-auto;
+  }
+
+  .math-inline {
+    @apply mx-1;
+  }
+
+  /* Navigation styling */
+  .nav-header {
+    @apply sticky top-0 z-40 bg-obsidian-darker border-b border-obsidian-light;
+  }
+
+  .nav-link {
+    @apply px-4 py-2 rounded-md hover:bg-obsidian-light transition-colors;
+  }
+
+  .nav-link.active {
+    @apply bg-obsidian-light text-obsidian-link;
+  }
+
+  /* Content area */
+  .content-wrapper {
+    @apply max-w-4xl mx-auto px-6 py-8;
+  }
+
+  /* Table of contents */
+  .toc {
+    @apply sticky top-20 p-4 rounded-lg bg-obsidian-mid border border-obsidian-light;
+  }
+
+  .toc-link {
+    @apply block py-1 text-sm text-obsidian-text-muted hover:text-obsidian-link transition-colors;
+  }
+
+  .toc-link.active {
+    @apply text-obsidian-link font-medium;
+  }
+
+  /* Audio player styling */
+  .audio-player {
+    @apply w-full bg-obsidian-mid rounded-lg p-4 my-4;
+  }
+
+  audio {
+    @apply w-full;
+  }
+
+  /* Code blocks */
+  pre {
+    @apply bg-obsidian-mid rounded-lg p-4 overflow-x-auto my-4;
+  }
+
+  code {
+    @apply font-mono text-sm;
+  }
+
+  /* Tables */
+  table {
+    @apply w-full border-collapse my-4;
+  }
+
+  th {
+    @apply bg-obsidian-mid px-4 py-2 text-left font-semibold border border-obsidian-light;
+  }
+
+  td {
+    @apply px-4 py-2 border border-obsidian-light;
+  }
+
+  tr:hover {
+    @apply bg-obsidian-mid transition-colors;
+  }
+
+  /* Blockquotes */
+  blockquote {
+    @apply border-l-4 border-obsidian-accent pl-4 py-2 my-4 italic text-obsidian-text-muted;
+  }
+}
+
+/* MathJax equation styling */
+mjx-container {
+  @apply my-2;
+}
+
+mjx-container[display="true"] {
+  @apply my-4;
+}

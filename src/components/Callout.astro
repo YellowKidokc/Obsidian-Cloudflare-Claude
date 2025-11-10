@@ -1,0 +1,83 @@
+---
+// Callout component for Obsidian-style callouts
+// Usage: <Callout type="info" title="Note">Content here</Callout>
+// Supports: info, success, danger, warning, formula, mindmap, abstract, audio, podcast
+
+interface Props {
+  type: 'info' | 'success' | 'danger' | 'warning' | 'formula' | 'mindmap' | 'abstract' | 'audio' | 'podcast';
+  title?: string;
+  collapsible?: boolean;
+  defaultOpen?: boolean;
+}
+
+const {
+  type = 'info',
+  title,
+  collapsible = false,
+  defaultOpen = true
+} = Astro.props;
+
+const icons = {
+  info: '📄',
+  success: '✅',
+  danger: '⚠️',
+  warning: '⚡',
+  formula: '🔢',
+  mindmap: '🧠',
+  abstract: '📋',
+  audio: '🎵',
+  podcast: '🎙️',
+};
+
+const icon = icons[type] || icons.info;
+const displayTitle = title || type.charAt(0).toUpperCase() + type.slice(1);
+---
+
+<div class={`callout callout-${type}`}>
+  {collapsible ? (
+    <details open={defaultOpen}>
+      <summary class="callout-title cursor-pointer select-none">
+        <span class="mr-2">{icon}</span>
+        {displayTitle}
+      </summary>
+      <div class="callout-content mt-2">
+        <slot />
+      </div>
+    </details>
+  ) : (
+    <>
+      <div class="callout-title">
+        <span class="mr-2">{icon}</span>
+        {displayTitle}
+      </div>
+      <div class="callout-content mt-2">
+        <slot />
+      </div>
+    </>
+  )}
+</div>
+
+<style>
+  details > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  details > summary::marker {
+    display: none;
+  }
+
+  details > summary {
+    list-style: none;
+  }
+
+  details > summary::before {
+    content: '▶';
+    display: inline-block;
+    margin-right: 0.5rem;
+    transition: transform 0.2s;
+  }
+
+  details[open] > summary::before {
+    transform: rotate(90deg);
+  }
+</style>
